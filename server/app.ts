@@ -1,11 +1,18 @@
-import express, { Express, Request, Response , Application } from 'express';
+import express from 'express';
 import dotenv from 'dotenv'
+import {sequelize} from './dataAccess/dataAccess'
 dotenv.config()
 const port=process.env.PORT||8000
-const app: Application = express();
+const app= express();
 
+app.listen(port, async () => {
+    console.log(`Server is running at http://localhost:${port}`);
 
-
-app.listen(port, () => {
-  console.log(`Server is Fire at http://localhost:${port}`);
+    // בדיקת התחברות למסד נתונים
+    try {
+        await sequelize.authenticate();
+        console.log('Connection has been established successfully.');
+    } catch (error) {
+        console.error('Unable to connect to the database:', error);
+    }
 });
