@@ -1,22 +1,23 @@
 import { sequelize } from '../dataAccess/dataAccess';
 import { DataTypes } from 'sequelize';
-export const Users = sequelize.define('Users', {
+ const Users = sequelize.define('Users', {
     id: {
         primaryKey: true,
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    name: {
+    userName: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    password: {
+    userPassword: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    token: {
+    userToken: {
         type: DataTypes.STRING,
         allowNull: false
       }
     
 });
+export {Users}

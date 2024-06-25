@@ -1,7 +1,8 @@
-const sequelize  =require('../dataAccess/dataAccess');
-const { DataTypes } =require('sequelize');
-const { Users }     =require('./users');
- const Business = sequelize.define('Business', {
+import { sequelize } from '../dataAccess/dataAccess';
+import { DataTypes } from 'sequelize';
+import { Users } from './users';
+
+const Business = sequelize.define('Business', {
     id: {
         primaryKey: true,
         type: DataTypes.INTEGER,
@@ -18,7 +19,7 @@ const { Users }     =require('./users');
     businessDescription: {
         type: DataTypes.STRING,
         allowNull: false
-      },
+    },
     businessEmail: {
         type: DataTypes.STRING,
         allowNull: false
@@ -26,8 +27,9 @@ const { Users }     =require('./users');
     businessPhone: {
         type: DataTypes.STRING,
         allowNull: false
-    },
-    
+    }
 });
+
 Business.belongsTo(Users, { foreignKey: 'userId' });
-exports.Business=Business;
+
+export { Business };
