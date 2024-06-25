@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv'
-import {sequelize} from './dataAccess/dataAccess'
+import sequelize from './dataAccess/dataAccess'
+import { Users } from './models/users';
 dotenv.config()
 const port=process.env.PORT||8000
 const app= express();
@@ -16,3 +17,4 @@ app.listen(port, async () => {
         console.error('Unable to connect to the database:', error);
     }
 });
+

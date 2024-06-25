@@ -1,11 +1,10 @@
 import { Sequelize } from 'sequelize';
-import { Users } from '../models/users';
 require('dotenv').config();
 const DB_SERVER=process.env.DB_SERVER;
 const DB_NAME=process.env.DB_NAME;
 console.log("data access");
 
-export const sequelize = new Sequelize({
+ const sequelize = new Sequelize({
   dialect: 'mssql',
   dialectModulePath: 'msnodesqlv8/lib/sequelize',
   dialectOptions: {
@@ -25,11 +24,13 @@ export const sequelize = new Sequelize({
     idle: 10000
   }
 });
-
+export default sequelize;
 console.log("Sequelize initialized successfully");
 
 (async () => {
     try {
+      console.log("in data access");
+      
         console.log("Attempting to authenticate with the database");
         await sequelize.authenticate();
         console.log('Connection has been established successfully.');
@@ -38,21 +39,3 @@ console.log("Sequelize initialized successfully");
         console.error('Unable to connect to the database:', error);
     }
 })();
-// try {
-//     console.log("try");
-    
-//     sequelize.authenticate().then(async () => {
-//         await Users.sync();
-//         const user = await Users.create({
-//             id: 1,
-//             name: "aa",
-//             password:"ghj",
-//             token:"rty"
-//         });
-//     });
-    
-    
-// } catch (error) {
-//     console.log(error);
-    
-// }

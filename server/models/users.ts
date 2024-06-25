@@ -1,5 +1,15 @@
-import { sequelize } from '../dataAccess/dataAccess';
+import  sequelize  from '../dataAccess/dataAccess';
 import { DataTypes } from 'sequelize';
+
+if (!sequelize) {
+    console.log("no seq");
+    
+  }
+  else{
+    console.log("yes seq");
+    
+  }
+  
  const Users = sequelize.define('Users', {
     id: {
         primaryKey: true,

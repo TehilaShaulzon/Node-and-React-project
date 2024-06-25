@@ -1,7 +1,8 @@
-import { sequelize } from '../dataAccess/dataAccess';
+import sequelize from '../dataAccess/dataAccess';
 import { DataTypes } from 'sequelize';
 import { Business } from './business';
- const Services = sequelize.define('SErvices', {
+
+ const Services = sequelize.define('Services', {
     id: {
         primaryKey: true,
         type: DataTypes.INTEGER,

@@ -1,4 +1,4 @@
-import { sequelize } from '../dataAccess/dataAccess';
+import  sequelize  from '../dataAccess/dataAccess';
 import { DataTypes } from 'sequelize';
 import { Business } from './business';
  const Meetings = sequelize.define('Meetings', {
