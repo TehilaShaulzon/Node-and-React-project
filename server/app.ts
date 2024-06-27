@@ -13,14 +13,7 @@ setupSwagger(app);
 app.use('/users', usersController);
 
 app.listen(port, async () => {
-    console.log(`Server is running at http://localhost:${port}`);
+    console.log(`Server is running at http://localhost:${port}/docs`);
 
-    // בדיקת התחברות למסד נתונים
-    // try {
-    //     await sequelize.authenticate();
-    //     console.log('Connection has been established successfully.');
-    // } catch (error) {
-    //     console.error('Unable to connect to the database:', error);
-    // }
 });
 

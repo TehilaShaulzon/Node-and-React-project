@@ -3,31 +3,24 @@ import { Request, Response } from 'express';
 
 import express from 'express';
 const router = express.Router();
-/**
- * @swagger
- * /users:
- *   get:
- *     summary: Returns a list of users
- *     responses:
- *       200:
- *         description: A JSON array of user names
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: string
- */
-router.get('/', async (req:Request, res:Response) => {
+router.get('/', async (req: Request, res: Response) => {
     try {
-        const users = await Users.findAll({
+        const users = await Users.findOne({
+            where: {
+                id: 2
+            },
             raw: true
         })
-        res.json(users)
+        
+        if (!users) {
+            return res.status(404).json({ message: 'User not found' });
+        }
 
-}
-    catch (err) {
-        res.send(err);
+        res.status(200).json(users);
+    } catch (err) {
+       
+            res.status(500).json({ message: 'Internal server error' });
+       
         console.error('Error:', err);
     }
 });
