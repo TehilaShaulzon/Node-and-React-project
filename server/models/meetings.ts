@@ -1,20 +1,34 @@
-import  sequelize  from '../dataAccess/dataAccess';
-import { DataTypes } from 'sequelize';
+import { Model, DataTypes } from 'sequelize';
+import sequelize from '../dataAccess/dataAccess';
 import { Business } from './business';
- const Meetings = sequelize.define('Meetings', {
-    id: {
-      primaryKey:true,
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    businessId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    meetingDate: {
-        type: DataTypes.DATE,
-        allowNull: false
-      },
+class Meetings extends Model {
+  public id!: number;
+
+  public businessId!: number;
+  public meetingDate!: Date;
+}
+Meetings.init({
+  id: {
+    primaryKey: true,
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    allowNull: false
+  },
+  businessId: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  meetingDate: {
+    type: DataTypes.DATE,
+    allowNull: false
+  },
+},
+  {
+    sequelize,
+    tableName: 'meetings',
   });
-  Meetings.belongsTo(Business, { foreignKey: 'businessId' });
-  export {Meetings}
+
+Meetings.belongsTo(Business, { foreignKey: 'businessId' });
+export { Meetings };
+
+

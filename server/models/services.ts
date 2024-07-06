@@ -1,11 +1,20 @@
+import { Model, DataTypes } from 'sequelize';
 import sequelize from '../dataAccess/dataAccess';
-import { DataTypes } from 'sequelize';
 import { Business } from './business';
 
- const Services = sequelize.define('Services', {
+class Services extends Model {
+    public id!: number;
+    public serviceName!: string;
+    public serviceDescription!: string;
+    public serviceCost!: number;
+    public businessId!: number;
+}
+
+Services.init({
     id: {
         primaryKey: true,
         type: DataTypes.INTEGER,
+        autoIncrement: true,
         allowNull: false
     },
     serviceName: {
@@ -19,13 +28,17 @@ import { Business } from './business';
     serviceCost: {
         type: DataTypes.DOUBLE,
         allowNull: false
-      },
-    businessId:{
-        type:DataTypes.INTEGER,
-        allowNull:false
+    },
+    businessId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 
-});
+},
+    {
+        sequelize,
+        tableName: 'services',
+    });
 Services.belongsTo(Business, { foreignKey: 'businessId' });
 
-export {Services}
+export { Services }

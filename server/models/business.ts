@@ -1,35 +1,51 @@
-import sequelize  from '../dataAccess/dataAccess';
-import { DataTypes } from 'sequelize';
-import { Users } from './users';
+import { Model, DataTypes } from 'sequelize';
+import sequelize from '../dataAccess/dataAccess';
+import { User } from './user';
 
-const Business = sequelize.define('Business', {
+class Business extends Model {
+  public id!: number;
+  public userId!: number;
+  public businessName!: string;
+  public businessDescription!: string;
+  public businessEmail!: string;
+  public businessPhone!: string;
+}
+
+Business.init(
+  {
     id: {
-        primaryKey: true,
-        type: DataTypes.INTEGER,
-        allowNull: false
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+      allowNull:false
     },
     userId: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     businessName: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     businessDescription: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     businessEmail: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     businessPhone: {
-        type: DataTypes.STRING,
-        allowNull: false
-    }
-});
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  {
+    sequelize,
+    tableName: 'business',
+  }
+);
 
-Business.belongsTo(Users, { foreignKey: 'userId' });
+Business.belongsTo(User, { foreignKey: 'userId' });
 
 export { Business };

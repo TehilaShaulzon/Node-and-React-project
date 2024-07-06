@@ -1,10 +1,20 @@
-import  sequelize  from '../dataAccess/dataAccess';
-import { DataTypes } from 'sequelize';
+import { Model, DataTypes } from 'sequelize';
+import sequelize from '../dataAccess/dataAccess';
   
- const Users = sequelize.define('Users', {
+
+class User extends Model {
+  public id!: number;
+  public userName!: string;
+  public userPassword!: string;
+  public userToken!: string;
+
+}
+
+  User.init( {
     id: {
         primaryKey: true,
         type: DataTypes.INTEGER,
+        autoIncrement: true,
         allowNull: false
     },
     userName: {
@@ -20,5 +30,10 @@ import { DataTypes } from 'sequelize';
         allowNull: false
       }
     
+} ,{
+    sequelize,
+    tableName: 'users',
 });
-export {Users}
+export {User}
+
+
