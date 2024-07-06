@@ -1,9 +1,9 @@
 import { Sequelize } from 'sequelize';
 require('dotenv').config();
-const DB_SERVER=process.env.DB_SERVER;
-const DB_NAME=process.env.DB_NAME;
+const DB_SERVER = process.env.DB_SERVER;
+const DB_NAME = process.env.DB_NAME;
 
- const sequelize = new Sequelize({
+const sequelize = new Sequelize({
   dialect: 'mssql',
   dialectModulePath: 'msnodesqlv8/lib/sequelize',
   dialectOptions: {

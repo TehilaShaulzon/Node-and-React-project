@@ -1,13 +1,13 @@
-import { Users } from "../models/users";
+import { User } from "../models/user";
 import { Request, Response } from 'express';
 
 import express from 'express';
 const router = express.Router();
 router.get('/', async (req: Request, res: Response) => {
     try {
-        const users = await Users.findOne({
+        const users = await User.findOne({
             where: {
-                id: 2
+                id: 3
             },
             raw: true
         })
