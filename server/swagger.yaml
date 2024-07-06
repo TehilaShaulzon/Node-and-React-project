@@ -62,4 +62,56 @@ paths:
                     type: integer
                   name:
                     type: string
-       
+  /business:
+    post:
+      summary: Add a new business
+      description: Adds a new business to the system
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: integer
+                  example: 1
+                businessName:
+                  type: string
+                  example: "My Business"
+                businessDescription:
+                  type: string
+                  example: "This is a description of my business."
+                businessEmail:
+                  type: string
+                  example: "business@example.com"
+                businessPhone:
+                  type: string
+                  example: "+1234567890"
+      responses:
+        '201':
+          description: Successfully added
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 2
+                  userId:
+                    type: integer
+                    example: 1
+                  businessName:
+                    type: string
+                    example: "My Business"
+                  businessDescription:
+                    type: string
+                    example: "This is a description of my business."
+                  businessEmail:
+                    type: string
+                    example: "business@example.com"
+                  businessPhone:
+                    type: string
+                    example: "+1234567890"
+                               
