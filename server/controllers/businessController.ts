@@ -1,4 +1,4 @@
-import { addBusiness } from "../services/businessService";
+import { addBusiness, updateBusiness } from "../services/businessService";
 import { Request, Response } from 'express';
 import {  CustomError } from "../errors/CustomError"
 
@@ -16,6 +16,23 @@ router.post('/', async (req: Request, res: Response) => {
             res.status(500).send('Internal Server Error');
         }
         console.error('Error:', err);
+    }
+});
+
+router.put('/:businessId', async (req: Request, res: Response) => {
+    try {
+        const businessId = parseInt(req.params.businessId);
+        const userId = req.body.userId; // Assuming userId is sent in the body
+        const updatedData = req.body;
+
+        const result = await updateBusiness(businessId, userId, updatedData);
+        res.send(result);
+    } catch (err: any) {
+        if (err instanceof CustomError) {
+            res.status(err.statusCode).send(err.message);
+        } else {
+            res.status(500).send('Internal Server Error');
+        }
     }
 });
 

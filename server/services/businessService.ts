@@ -31,10 +31,37 @@ export async function addBusiness(newBusiness: Business) {
         businessPhone: newBusiness.businessPhone
     });
 
-    // Fetch the created business without createdAt and updatedAt fields
     const result = await Business.findByPk(business.id, {
         attributes: { exclude: ['createdAt', 'updatedAt'] }
     });
 
     return result;
 }
+
+
+
+export async function updateBusiness(businessId: number, userId: number, updatedBusiness: Partial<Business>) {
+    try {
+        const business = await Business.findOne({
+            where: { id: businessId }
+        });
+
+        if (!business) {
+            throw new CustomError('Business not found', 404);
+        }
+
+        if (business.userId !== userId) {
+            throw new CustomError('Error in user Id', 403);
+        }
+
+        await business.update(updatedBusiness);
+
+        const { createdAt, updatedAt, ...result } = business.get();
+
+        return result;
+    } catch (error: any) {
+        console.error('Error updating Business:', error.message);
+        throw new CustomError(error.message, error.statusCode || 500);
+    }
+}
+

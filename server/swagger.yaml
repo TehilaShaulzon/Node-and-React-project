@@ -16,7 +16,7 @@ paths:
                 type: array
                 items:
                   type: string
-      
+
   /users/{id}:
     get:
       summary: Returns a user by ID
@@ -37,7 +37,8 @@ paths:
                   id:
                     type: integer
                   name:
-       
+                    type: string
+
   /users:
     post:
       summary: Creates a new user
@@ -62,6 +63,7 @@ paths:
                     type: integer
                   name:
                     type: string
+
   /business:
     post:
       summary: Add a new business
@@ -114,4 +116,62 @@ paths:
                   businessPhone:
                     type: string
                     example: "+1234567890"
-                               
+
+  /business/{id}:
+    put:
+      summary: Update an existing business
+      description: Updates an existing business in the system
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: integer
+                  example: 1
+                businessName:
+                  type: string
+                  example: "Updated Business"
+                businessDescription:
+                  type: string
+                  example: "This is an updated description of my business."
+                businessEmail:
+                  type: string
+                  example: "updated_business@example.com"
+                businessPhone:
+                  type: string
+                  example: "+0987654321"
+      responses:
+        '200':
+          description: Successfully updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 2
+                  userId:
+                    type: integer
+                    example: 1
+                  businessName:
+                    type: string
+                    example: "Updated Business"
+                  businessDescription:
+                    type: string
+                    example: "This is an updated description of my business."
+                  businessEmail:
+                    type: string
+                    example: "updated_business@example.com"
+                  businessPhone:
+                    type: string
+                    example: "+0987654321"
