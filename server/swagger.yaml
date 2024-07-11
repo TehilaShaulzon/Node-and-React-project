@@ -75,9 +75,6 @@ paths:
             schema:
               type: object
               properties:
-                userId:
-                  type: integer
-                  example: 1
                 businessName:
                   type: string
                   example: "My Business"
@@ -101,9 +98,6 @@ paths:
                   id:
                     type: integer
                     example: 2
-                  userId:
-                    type: integer
-                    example: 1
                   businessName:
                     type: string
                     example: "My Business"
@@ -134,9 +128,6 @@ paths:
             schema:
               type: object
               properties:
-                userId:
-                  type: integer
-                  example: 1
                 businessName:
                   type: string
                   example: "Updated Business"
@@ -160,9 +151,6 @@ paths:
                   id:
                     type: integer
                     example: 2
-                  userId:
-                    type: integer
-                    example: 1
                   businessName:
                     type: string
                     example: "Updated Business"
