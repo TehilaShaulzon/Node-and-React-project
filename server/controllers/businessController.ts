@@ -22,10 +22,9 @@ router.post('/', async (req: Request, res: Response) => {
 router.put('/:businessId', async (req: Request, res: Response) => {
     try {
         const businessId = parseInt(req.params.businessId);
-        const userId = req.body.userId; // Assuming userId is sent in the body
         const updatedData = req.body;
 
-        const result = await updateBusiness(businessId, userId, updatedData);
+        const result = await updateBusiness(businessId,  updatedData);
         res.send(result);
     } catch (err: any) {
         if (err instanceof CustomError) {
