@@ -7,7 +7,6 @@ class Services extends Model {
     public serviceName!: string;
     public serviceDescription!: string;
     public serviceCost!: number;
-    public businessId!: number;
 }
 
 Services.init({
@@ -28,17 +27,11 @@ Services.init({
     serviceCost: {
         type: DataTypes.DOUBLE,
         allowNull: false
-    },
-    businessId: {
-        type: DataTypes.INTEGER,
-        allowNull: false
     }
-
 },
     {
         sequelize,
         tableName: 'services',
     });
-Services.belongsTo(Business, { foreignKey: 'businessId' });
 
 export { Services }

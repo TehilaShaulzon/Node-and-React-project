@@ -4,7 +4,6 @@ import { User } from './user';
 
 class Business extends Model {
   public id!: number;
-  public userId!: number;
   public businessName!: string;
   public businessDescription!: string;
   public businessEmail!: string;
@@ -18,10 +17,6 @@ Business.init(
       autoIncrement: true,
       primaryKey: true,
       allowNull:false
-    },
-    userId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
     },
     businessName: {
       type: DataTypes.STRING,
@@ -46,6 +41,5 @@ Business.init(
   }
 );
 
-Business.belongsTo(User, { foreignKey: 'userId' });
 
 export { Business };
