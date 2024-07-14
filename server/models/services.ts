@@ -7,6 +7,8 @@ class Services extends Model {
     public serviceName!: string;
     public serviceDescription!: string;
     public serviceCost!: number;
+    public serviceDuration!: number;
+
 }
 
 Services.init({
@@ -26,6 +28,10 @@ Services.init({
     },
     serviceCost: {
         type: DataTypes.DOUBLE,
+        allowNull: false
+    },
+    serviceDuration: {
+        type: DataTypes.INTEGER,
         allowNull: false
     }
 },
