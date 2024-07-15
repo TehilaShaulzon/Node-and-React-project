@@ -1,9 +1,25 @@
 import { Business } from "../models/business";
 import sequelize from "../dataAccess/dataAccess";
 import { CustomError } from "../errors/CustomError";
+import { hasMinimumLetters, isValidEmail, isValidPhoneNumber } from "../validators/validators";
 
 export async function addBusiness(newBusiness: Business) {
  
+    if (!newBusiness.businessName || !newBusiness.businessDescription || !newBusiness.businessEmail || !newBusiness.businessPhone) {
+        throw new CustomError('Missing required fields', 400);
+    }
+
+    if (!isValidEmail(newBusiness.businessEmail)) {
+        throw new CustomError('Invalid email format', 400);
+    }
+
+    if (!isValidPhoneNumber(newBusiness.businessPhone)) {
+        throw new CustomError('Invalid phone number format', 400);
+    }
+
+    if (!hasMinimumLetters(newBusiness.businessName)) {
+        throw new CustomError('Business name must contain at least 2 letters', 400);
+    }
     await sequelize.authenticate();
     await Business.sync();
 

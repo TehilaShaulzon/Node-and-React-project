@@ -4,16 +4,27 @@ import bcrypt from 'bcryptjs';
 import sequelize from "../dataAccess/dataAccess";
 import { CustomError } from '../errors/CustomError';
 import _ from 'lodash';
+import { hasMinimumLetters, isValidEmail, isValidPassword } from '../validators/validators';
 
 require('dotenv').config();
 const JWT_SECRET = process.env.JWT_SECRET;
 export async function addUser(user: User) {
-    console.log(user);
-    
+    if (!user.userName || !user.userEmail || !user.userPassword) {
+        throw new CustomError('Missing required fields', 400);
+    }
+    if (!isValidEmail(user.userEmail)) {
+        throw new CustomError('Invalid email format', 400);
+    }
+    if (!isValidPassword(user.userPassword)) {
+        throw new CustomError('Invalid password format or strength', 400);
+    }
+    if (!hasMinimumLetters(user.userName)) {
+        throw new CustomError('User name must contain at least 2 letters', 400);
+    }
     user.userPassword = await bcrypt.hash(user.userPassword, 10);
     const token = jwt.sign(
         { user_id: user.id, email: user.userEmail },
-        "1234567890",
+        `${JWT_SECRET}`,
         {
             expiresIn: "2h",
         }
@@ -43,7 +54,13 @@ export async function addUser(user: User) {
     return { user: userWithoutPassword, token: result?.userToken };
 }
 export async function login(loginEmail:string, loginPassword:string) {
-    
+    if (!loginEmail || !loginPassword) {
+        throw new CustomError('Email and password are required', 400);
+    }
+
+    if (!isValidEmail(loginEmail)) {
+        throw new CustomError('Invalid email format', 400);
+    }
     const foundUser = await User.findOne({
         where: {
             userEmail: loginEmail

@@ -5,7 +5,7 @@ import {  CustomError } from "../errors/CustomError"
 const express = require('express');
 const router = express.Router();
 
-router.post('/', async (req: Request, res: Response) => {
+router.post('/addBusiness', async (req: Request, res: Response) => {
     try {
         const result = await addBusiness(req.body);
         res.send(result);
@@ -19,7 +19,7 @@ router.post('/', async (req: Request, res: Response) => {
     }
 });
 
-router.put('/:businessId', async (req: Request, res: Response) => {
+router.put('/updateBusiness/:businessId', async (req: Request, res: Response) => {
     try {
         const businessId = parseInt(req.params.businessId);
         const updatedData = req.body;
