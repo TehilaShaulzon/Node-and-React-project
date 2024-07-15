@@ -81,7 +81,7 @@ paths:
                     type: string
                     example: "your.jwt.token.here"         
  
-  /business:
+  /business/addBusiness:
     post:
       summary: Add a new business
       description: Adds a new business to the system
@@ -128,7 +128,7 @@ paths:
                     type: string
                     example: "+1234567890"
 
-  /business/{id}:
+  /business/updateBusiness/{id}:
     put:
       summary: Update an existing business
       description: Updates an existing business in the system
