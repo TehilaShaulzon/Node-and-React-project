@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/addBusiness', async (req: Request, res: Response) => {
     try {
         const result = await addBusiness(req.body);
-        res.send(result);
+        res.status(201).json(result);
     } catch (err: any) {
         if (err instanceof CustomError) {
             res.status(err.statusCode).send(err.message);
@@ -25,7 +25,7 @@ router.put('/updateBusiness/:businessId', async (req: Request, res: Response) =>
         const updatedData = req.body;
 
         const result = await updateBusiness(businessId,  updatedData);
-        res.send(result);
+        res.status(200).json(result);
     } catch (err: any) {
         if (err instanceof CustomError) {
             res.status(err.statusCode).send(err.message);
