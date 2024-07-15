@@ -40,7 +40,22 @@ export async function addBusiness(newBusiness: Business) {
 
 
 export async function updateBusiness(businessId: number, updatedBusiness: Partial<Business>) {
-    try {
+
+        if (!updatedBusiness.businessName || !updatedBusiness.businessDescription || !updatedBusiness.businessEmail || !updatedBusiness.businessPhone) {
+            throw new CustomError('Missing required fields', 400);
+        }
+    
+        if (!isValidEmail(updatedBusiness.businessEmail)) {
+            throw new CustomError('Invalid email format', 400);
+        }
+    
+        if (!isValidPhoneNumber(updatedBusiness.businessPhone)) {
+            throw new CustomError('Invalid phone number format', 400);
+        }
+    
+        if (!hasMinimumLetters(updatedBusiness.businessName)) {
+            throw new CustomError('Business name must contain at least 2 letters', 400);
+        }
         const business = await Business.findOne({
             where: { id: businessId }
         });
@@ -55,9 +70,6 @@ export async function updateBusiness(businessId: number, updatedBusiness: Partia
         const { createdAt, updatedAt, ...result } = business.get();
 
         return result;
-    } catch (error: any) {
-        console.error('Error updating Business:', error.message);
-        throw new CustomError(error.message, error.statusCode || 500);
-    }
+   
 }
 
