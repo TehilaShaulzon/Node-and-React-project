@@ -180,3 +180,90 @@ paths:
                   businessPhone:
                     type: string
                     example: "+0987654321"
+    /addService:
+    post:
+      summary: Add a new service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+
+  /updateService/{serviceId}:
+    put:
+      summary: Update an existing service
+      parameters:
+        - name: serviceId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: updatedData
+          in: body
+          required: true
+          schema:
+            $ref: '#/components/schemas/Service'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+
+  /getServices:
+    get:
+      summary: Get all services
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Service'
+        '500':
+          description: Internal Server Error
+
+  /deleteServiceById/{serviceId}:
+    delete:
+      summary: Delete a service by ID
+      parameters:
+        - name: serviceId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
