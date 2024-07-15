@@ -4,44 +4,9 @@ info:
   version: 1.0.0
 
 paths:
-  /users:
-    get:
-      summary: Returns a list of users
-      responses:
-        '200':
-          description: A JSON array of user names
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: string
-
-  /users/{id}:
-    get:
-      summary: Returns a user by ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: A user object
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-
-  /users:
+  /users/signUp:
     post:
-      summary: Creates a new user
+      summary: Add a new user
       requestBody:
         required: true
         content:
@@ -49,11 +14,19 @@ paths:
             schema:
               type: object
               properties:
-                name:
+                userName:
                   type: string
+                userPassword:
+                  type: string
+                userEmail:
+                  type: string
+              required:
+                - userName
+                - userPassword
+                - userEmail
       responses:
         '201':
-          description: User created successfully
+          description: Successfully added user
           content:
             application/json:
               schema:
@@ -63,7 +36,51 @@ paths:
                     type: integer
                   name:
                     type: string
-
+                  email:
+                    type: string
+                  token:
+                    type: string
+  /users/login:
+    post:
+      summary: User login
+      description: Authenticates a user and returns a token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                loginEmail:
+                  type: string
+                  format: email
+                  example: "user@example.com"
+                loginPassword:
+                  type: string
+                  format: password
+                  example: "userpassword"
+      responses:
+        '200':
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      userName:
+                        type: string
+                      userEmail:
+                        type: string
+                        format: email
+                  token:
+                    type: string
+                    example: "your.jwt.token.here"         
+ 
   /business:
     post:
       summary: Add a new business
