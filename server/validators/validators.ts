@@ -1,3 +1,5 @@
+import { CustomError } from "../errors/CustomError";
+
 export function isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -13,19 +15,26 @@ export function hasMinimumLetters(name: string): boolean {
     return letterRegex.test(name);
 }
 export function isValidPassword(password: string): boolean {
-    const minLength = 8;
+    if (password.length < 8) {
+        throw new CustomError('Password must be at least 8 characters long', 400);
+    }
     const hasNumber = /\d/;
     const hasLowerCase = /[a-z]/;
     const hasUpperCase = /[A-Z]/;
     const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/;
-    if (password.length < minLength) {
-        return false;
+
+    if (!hasNumber.test(password)) {
+        throw new CustomError('Password must contain at least one number', 400);
     }
-    if (!hasNumber.test(password) ||
-        !hasLowerCase.test(password) ||
-        !hasUpperCase.test(password) ||
-        !hasSpecialChar.test(password)) {
-        return false;
+    if (!hasLowerCase.test(password)) {
+        throw new CustomError('Password must contain at least one lowercase letter', 400);
     }
+    if (!hasUpperCase.test(password)) {
+        throw new CustomError('Password must contain at least one uppercase letter', 400);
+    }
+    if (!hasSpecialChar.test(password)) {
+        throw new CustomError('Password must contain at least one special character', 400);
+    }
+
     return true;
 }
