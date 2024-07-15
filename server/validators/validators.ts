@@ -40,15 +40,9 @@ export function isValidPassword(password: string): boolean {
 }
 
 export function isValidServiceCost(serviceCost: number): boolean {
-    if (serviceCost < 50) {
-        throw new CustomError('Service cost must be at least 50 NIS', 400);
-    }
-    return true;
+    return serviceCost>50;
 }
 
 export function isValidServiceDuration(serviceDuration: number): boolean {
-    if (serviceDuration < 10) {
-        throw new CustomError('Service duration must be at least 10 minutes', 400);
-    }
-    return true;
+   return serviceDuration>10;
 }
