@@ -1,9 +1,9 @@
-import { Services } from "../models/service";
+import { Service } from "../models/service";
 import sequelize from "../dataAccess/dataAccess";
 import { CustomError } from "../errors/CustomError";
 import { hasMinimumLetters, isValidServiceCost, isValidServiceDuration } from "../validators/validators";
 
-export async function addService(newService: Services) {
+export async function addService(newService: Service) {
  
     if (!newService.serviceName || !newService.serviceDescription || !newService.serviceCost || !newService.serviceDuration) {
         throw new CustomError('Missing required fields', 400);
@@ -19,22 +19,22 @@ export async function addService(newService: Services) {
     }
 
     await sequelize.authenticate();
-    await Services.sync();
-    const existingService = await Services.findOne({
+    await Service.sync();
+    const existingService = await Service.findOne({
         where: { serviceName: newService.serviceName }
     });
 
     if (existingService) {
         throw new CustomError('A service with the same name already exists', 400);
     }
-    const service = await Services.create({
+    const service = await Service.create({
         serviceName: newService.serviceName,
         serviceDescription: newService.serviceDescription,
         serviceCost: newService.serviceCost,
         serviceDuration: newService.serviceDuration
     });
 
-    const result = await Services.findByPk(service.id, {
+    const result = await Service.findByPk(service.id, {
         attributes: { exclude: ['createdAt', 'updatedAt'] }
     });
 
@@ -43,7 +43,7 @@ export async function addService(newService: Services) {
 
 
 
-export async function updateService(serviceId: number, updatedService: Services) {
+export async function updateService(serviceId: number, updatedService: Service) {
   if (!updatedService.serviceName || !updatedService.serviceDescription || !updatedService.serviceCost || !updatedService.serviceDuration) {
         throw new CustomError('Missing required fields', 400);
     }
@@ -56,7 +56,7 @@ export async function updateService(serviceId: number, updatedService: Services)
     if (!isValidServiceDuration(updatedService.serviceDuration)) {
         throw new CustomError('Service duration must be at least 10 minutes', 400);
     }
-    const service = await Services.findOne({
+    const service = await Service.findOne({
         where: { id: serviceId }
     });
 
@@ -64,7 +64,7 @@ export async function updateService(serviceId: number, updatedService: Services)
         throw new CustomError('service not found', 404);
     }
 
-    const existingService = await Services.findOne({
+    const existingService = await Service.findOne({
         where: { serviceName: updatedService.serviceName }
     });
 
@@ -80,14 +80,14 @@ export async function updateService(serviceId: number, updatedService: Services)
 }
 
 export async function getServices() {
-    const services = await Services.findAll({
+    const services = await Service.findAll({
         attributes: { exclude: ['createdAt', 'updatedAt'] }
     });
     return services;
 }
 export async function deleteService(serviceId: number) {
 
-    const service = await Services.findByPk(serviceId);
+    const service = await Service.findByPk(serviceId);
 
     if (!service) {
         throw new CustomError('Service not found', 404);
