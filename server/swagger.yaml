@@ -165,7 +165,7 @@ paths:
                   example: "updated_business@example.com"
                 businessPhone:
                   type: string
-                  example: "+0987654321"
+                  example: "0987654321"
       responses:
         '200':
           description: Successfully updated
