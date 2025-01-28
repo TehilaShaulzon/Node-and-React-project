@@ -188,7 +188,7 @@ paths:
                     example: "updated_business@example.com"
                   businessPhone:
                     type: string
-                    example: "+0987654321"
+                    example: "0987654321"
 
   /services/addService:
     post:
@@ -275,20 +275,20 @@ paths:
     post:
       summary: Add a new meeting
       tags:
-        - Services
+        - Meetings
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Services'
+              $ref: '#/components/schemas/Meetings'
       responses:
         '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Services'
+                $ref: '#/components/schemas/Meetings'
 components:
   schemas:
     User:
