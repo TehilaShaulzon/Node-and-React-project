@@ -1,257 +1,3 @@
-# openapi: 3.0.0
-# info:
-#   title: User API
-#   version: 1.0.0
-
-# paths:
-#   /users/signUp:
-#     post:
-#       summary: Add a new user
-#       requestBody:
-#         required: true
-#         content:
-#           application/json:
-#             schema:
-#               type: object
-#               properties:
-#                 userName:
-#                   type: string
-#                 userPassword:
-#                   type: string
-#                 userEmail:
-#                   type: string
-#               required:
-#                 - userName
-#                 - userPassword
-#                 - userEmail
-#       responses:
-#         '201':
-#           description: Successfully added user
-#           content:
-#             application/json:
-#               schema:
-#                 type: object
-#                 properties:
-#                   id:
-#                     type: integer
-#                   name:
-#                     type: string
-#                   email:
-#                     type: string
-#                   token:
-#                     type: string
-#   /users/login:
-#     post:
-#       summary: User login
-#       description: Authenticates a user and returns a token
-#       requestBody:
-#         required: true
-#         content:
-#           application/json:
-#             schema:
-#               type: object
-#               properties:
-#                 loginEmail:
-#                   type: string
-#                   format: email
-#                   example: "user@example.com"
-#                 loginPassword:
-#                   type: string
-#                   format: password
-#                   example: "userpassword"
-#       responses:
-#         '200':
-#           description: Successful login
-#           content:
-#             application/json:
-#               schema:
-#                 type: object
-#                 properties:
-#                   user:
-#                     type: object
-#                     properties:
-#                       id:
-#                         type: integer
-#                       userName:
-#                         type: string
-#                       userEmail:
-#                         type: string
-#                         format: email
-#                   token:
-#                     type: string
-#                     example: "your.jwt.token.here"         
- 
-#   /business/addBusiness:
-#     post:
-#       summary: Add a new business
-#       description: Adds a new business to the system
-#       requestBody:
-#         required: true
-#         content:
-#           application/json:
-#             schema:
-#               type: object
-#               properties:
-#                 businessName:
-#                   type: string
-#                   example: "My Business"
-#                 businessDescription:
-#                   type: string
-#                   example: "This is a description of my business."
-#                 businessEmail:
-#                   type: string
-#                   example: "business@example.com"
-#                 businessPhone:
-#                   type: string
-#                   example: "+1234567890"
-#       responses:
-#         '201':
-#           description: Successfully added
-#           content:
-#             application/json:
-#               schema:
-#                 type: object
-#                 properties:
-#                   id:
-#                     type: integer
-#                     example: 2
-#                   businessName:
-#                     type: string
-#                     example: "My Business"
-#                   businessDescription:
-#                     type: string
-#                     example: "This is a description of my business."
-#                   businessEmail:
-#                     type: string
-#                     example: "business@example.com"
-#                   businessPhone:
-#                     type: string
-#                     example: "+1234567890"
-
-#   /business/updateBusiness/{id}:
-#     put:
-#       summary: Update an existing business
-#       description: Updates an existing business in the system
-#       parameters:
-#         - name: id
-#           in: path
-#           required: true
-#           schema:
-#             type: integer
-#       requestBody:
-#         required: true
-#         content:
-#           application/json:
-#             schema:
-#               type: object
-#               properties:
-#                 businessName:
-#                   type: string
-#                   example: "Updated Business"
-#                 businessDescription:
-#                   type: string
-#                   example: "This is an updated description of my business."
-#                 businessEmail:
-#                   type: string
-#                   example: "updated_business@example.com"
-#                 businessPhone:
-#                   type: string
-#                   example: "+0987654321"
-#       responses:
-#         '200':
-#           description: Successfully updated
-#           content:
-#             application/json:
-#               schema:
-#                 type: object
-#                 properties:
-#                   id:
-#                     type: integer
-#                     example: 2
-#                   businessName:
-#                     type: string
-#                     example: "Updated Business"
-#                   businessDescription:
-#                     type: string
-#                     example: "This is an updated description of my business."
-#                   businessEmail:
-#                     type: string
-#                     example: "updated_business@example.com"
-#                   businessPhone:
-#                     type: string
-#                     example: "+0987654321"
-#     /addService:
-#     post:
-#       summary: Add a new service
-#       requestBody:
-#         required: true
-#         content:
-#           application/json:
-#             schema:
-#               $ref: '#/components/schemas/Service'
-#       responses:
-#         '201':
-#           description: Created
-#           content:
-#             application/json:
-#               schema:
-#                 $ref: '#/components/schemas/Service'
-
-#   /updateService/{serviceId}:
-#     put:
-#       summary: Update an existing service
-#       parameters:
-#         - name: serviceId
-#           in: path
-#           required: true
-#           schema:
-#             type: integer
-#         - name: updatedData
-#           in: body
-#           required: true
-#           schema:
-#             $ref: '#/components/schemas/Service'
-#       responses:
-#         '200':
-#           description: OK
-#           content:
-#             application/json:
-#               schema:
-#                 $ref: '#/components/schemas/Service'
-#   /getServices:
-#     get:
-#       summary: Get all services
-#       responses:
-#         '200':
-#           description: OK
-#           content:
-#             application/json:
-#               schema:
-#                 type: array
-#                 items:
-#                   $ref: '#/components/schemas/Service'
-
-#   /deleteServiceById/{serviceId}:
-#     delete:
-#       summary: Delete a service by ID
-#       parameters:
-#         - name: serviceId
-#           in: path
-#           required: true
-#           schema:
-#             type: integer
-#       responses:
-#         '200':
-#           description: OK
-#           content:
-#             application/json:
-#               schema:
-#                 type: object
-#                 properties:
-#                   message:
-#                     type: string
-
-
 openapi: 3.0.0
 info:
   title: User API
@@ -454,14 +200,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Service'
+              $ref: '#/components/schemas/Services'
       responses:
         '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Service'
+                $ref: '#/components/schemas/Services'
 
   /services/updateService/{serviceId}:
     put:
@@ -474,18 +220,19 @@ paths:
           required: true
           schema:
             type: integer
-        - name: updatedData
-          in: body
-          required: true
-          schema:
-            $ref: '#/components/schemas/Service'
+      requestBody:
+        required: true
+        content:
+          application/json:  
+            schema:
+              $ref: '#/components/schemas/Services'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Service'
+                $ref: '#/components/schemas/Services'
 
   /services/getServices:
     get:
@@ -500,7 +247,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Service'
+                  $ref: '#/components/schemas/Services'
 
   /services/deleteServiceById/{serviceId}:
     delete:
@@ -524,6 +271,24 @@ paths:
                   message:
                     type: string
 
+  /meetings/addMeeting:
+    post:
+      summary: Add a new meeting
+      tags:
+        - Services
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Services'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Services'
 components:
   schemas:
     User:
