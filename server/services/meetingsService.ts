@@ -2,7 +2,7 @@ import { Meetings } from "../models/meetings";
 import sequelize from "../dataAccess/dataAccess";
 import { CustomError } from "../errors/CustomError";
 import { Services } from "../models/services";
-import { Op } from 'sequelize';
+import { DATE, Op } from 'sequelize';
 import { User } from "../models/user";
 import { isValidMeetingDate } from "../validators/validators";
 
@@ -19,12 +19,16 @@ export async function addMeeting(newMeeting: Meetings) {
     throw new CustomError('Error in meeting date', 400);
   const endTime = new Date(newMeeting.meetingDate);
   endTime.setMinutes(endTime.getMinutes() + service.serviceDuration);
-
+console.log(newMeeting.meetingDate);
+newMeeting.meetingDate=new Date(newMeeting.meetingDate)
+console.log(newMeeting.meetingDate);
+console.log(typeof(newMeeting.meetingDate));
+await sequelize.sync();
   const conflictingMeetings = await Meetings.findOne({
     where: {
       meetingDate: {
         [Op.lt]: endTime,
-        [Op.gt]: new Date(newMeeting.meetingDate).setMinutes(newMeeting.meetingDate.getMinutes() - service.serviceDuration),
+        [Op.gt]: new Date(newMeeting.meetingDate).setMinutes(newMeeting.meetingDate.getMinutes()- service.serviceDuration),
       },
     },
   });
