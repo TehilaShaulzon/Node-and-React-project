@@ -341,13 +341,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Meetings'
-  /meetings/deleteMeeting/{meetingId}:
+  /meetings/deleteMeetingById/{meetingId}:
     delete:
       summary: Delete a meeting by ID
       tags:
         - Meetings
       parameters:
-        - name: meetingsId
+        - name: meetingId
           in: path
           required: true
           schema:

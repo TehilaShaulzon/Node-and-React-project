@@ -46,9 +46,10 @@ router.put('/updateMeeting/:meetingId', async (req: Request, res: Response) => {
         }
     }
 });
-router.delete('/deleteMeetingById/:MeetingId', async (req: Request, res: Response) => {
+router.delete('/deleteMeetingById/:meetingId', async (req: Request, res: Response) => {
     try {
-        const MeetingId=parseInt(req.params.MeetingId);
+        const MeetingId=parseInt(req.params.meetingId);
+        
         const result = await deleteMeeting(MeetingId);
         res.status(200).json(result);
     } catch (err: any) {
