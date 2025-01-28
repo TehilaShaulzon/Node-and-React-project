@@ -3,6 +3,12 @@ import sequelize from "../dataAccess/dataAccess";
 import { CustomError } from "../errors/CustomError";
 import { hasMinimumLetters, isValidEmail, isValidPhoneNumber } from "../validators/validators";
 
+export async function getBusiness() {
+    const services = await Business.findAll({
+        attributes: { exclude: ['createdAt', 'updatedAt'] }
+    });
+    return services;
+}
 export async function addBusiness(newBusiness: Business) {
  
     if (!newBusiness.businessName || !newBusiness.businessDescription || !newBusiness.businessEmail || !newBusiness.businessPhone) {
