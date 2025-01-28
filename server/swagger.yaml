@@ -341,6 +341,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Meetings'
+  /meetings/deleteMeeting/{meetingId}:
+    delete:
+      summary: Delete a meeting by ID
+      tags:
+        - Meetings
+      parameters:
+        - name: meetingsId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
 
 components:
   schemas:
