@@ -284,7 +284,21 @@ paths:
                 properties:
                   message:
                     type: string
-
+  /meetings/getMeetings:
+    get:
+      summary: Get all meetings
+      tags:
+        - Meetings
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Meetings'
+                
   /meetings/addMeeting:
     post:
       summary: Add a new meeting
