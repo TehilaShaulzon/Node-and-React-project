@@ -1,13 +1,13 @@
-import { Meetings } from "../models/meetings";
+import { Meeting } from "../models/meeting";
 import sequelize from "../dataAccess/dataAccess";
 import { CustomError } from "../errors/CustomError";
-import { Services } from "../models/services";
+import { Service } from "../models/service";
 import { DATE, Op } from 'sequelize';
 import { User } from "../models/user";
 import { isValidMeetingDate } from "../validators/validators";
 
-export async function addMeeting(newMeeting: Meetings) {
-  const service = await Services.findByPk(newMeeting.serviceId);
+export async function addMeeting(newMeeting: Meeting) {
+  const service = await Service.findByPk(newMeeting.serviceId);
   if (!service) {
     throw new CustomError('Service with this Id not found', 404);
   }
@@ -22,7 +22,7 @@ export async function addMeeting(newMeeting: Meetings) {
 newMeeting.meetingDate=new Date(newMeeting.meetingDate)
 
 await sequelize.sync();
-  const conflictingMeetings = await Meetings.findOne({
+  const conflictingMeetings = await Meeting.findOne({
     where: {
       meetingDate: {
         [Op.lt]: endTime,
@@ -35,15 +35,15 @@ await sequelize.sync();
     throw new CustomError('The selected time slot is already booked', 409);
   }
   await sequelize.authenticate();
-  await Meetings.sync();
+  await Meeting.sync();
 
-  const meeting = await Meetings.create({
+  const meeting = await Meeting.create({
     meetingDate: newMeeting.meetingDate,
     userId: newMeeting.userId,
     serviceId: newMeeting.serviceId
   });
 
-  const result = await Meetings.findByPk(meeting.id, {
+  const result = await Meeting.findByPk(meeting.id, {
     attributes: { exclude: ['createdAt', 'updatedAt'] }
   });
 
@@ -51,9 +51,9 @@ await sequelize.sync();
 }
 
 
-export async function updateMeeting(meetingId: number, updatedMeeting: Meetings) {
+export async function updateMeeting(meetingId: number, updatedMeeting: Meeting) {
 
-  const meeting = await Meetings.findOne({
+  const meeting = await Meeting.findOne({
     where: { id: meetingId }
   });
 
@@ -67,7 +67,7 @@ export async function updateMeeting(meetingId: number, updatedMeeting: Meetings)
   if (meeting.serviceId !== updatedMeeting.serviceId) {
     throw new CustomError('Cannot update serviceId for an existing meeting', 400);
   }
-  const service = await Services.findByPk(meeting.serviceId);
+  const service = await Service.findByPk(meeting.serviceId);
   if (!service) {
     throw new CustomError('Service with this Id not found', 404);
   }
@@ -77,7 +77,7 @@ export async function updateMeeting(meetingId: number, updatedMeeting: Meetings)
   endTime.setMinutes(endTime.getMinutes() + service.serviceDuration);
   updatedMeeting.meetingDate=new Date(updatedMeeting.meetingDate)
 
-  const conflictingMeetings = await Meetings.findOne({
+  const conflictingMeetings = await Meeting.findOne({
     where: {
       meetingDate: {
         [Op.lt]: endTime,

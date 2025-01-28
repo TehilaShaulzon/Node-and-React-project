@@ -4,7 +4,7 @@ import { User } from './models/user';
 import setupSwagger from './swaggerConfig';
 import usersController from './controllers/usersController';
 import businessController from './controllers/businessController';
-import servicesController from './controllers/serviceController'
+import servicesController from './controllers/servicesController'
 import meetingsController from './controllers/meetingsController';
 dotenv.config()
 const port=process.env.PORT||8000

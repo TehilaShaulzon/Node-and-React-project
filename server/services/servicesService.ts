@@ -1,4 +1,4 @@
-import { Services } from "../models/services";
+import { Services } from "../models/service";
 import sequelize from "../dataAccess/dataAccess";
 import { CustomError } from "../errors/CustomError";
 import { hasMinimumLetters, isValidServiceCost, isValidServiceDuration } from "../validators/validators";

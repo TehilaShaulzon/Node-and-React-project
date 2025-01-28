@@ -2,7 +2,7 @@ import { Model, DataTypes } from 'sequelize';
 import sequelize from '../dataAccess/dataAccess';
 import { Business } from './business';
 
-class Services extends Model {
+class Service extends Model {
     public id!: number;
     public serviceName!: string;
     public serviceDescription!: string;
@@ -11,7 +11,7 @@ class Services extends Model {
 
 }
 
-Services.init({
+Service.init({
     id: {
         primaryKey: true,
         type: DataTypes.INTEGER,
@@ -40,4 +40,4 @@ Services.init({
         tableName: 'services',
     });
 
-export { Services }
+export { Service }
