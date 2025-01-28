@@ -26,7 +26,7 @@ router.put('/updateMeeting/:meetingId', async (req: Request, res: Response) => {
 
         const result = await updateMeeting(meetingId, updatedData);
         res.status(200).json(result);
-    } catch (err: any) {
+    } catch (err: any) {      
         if (err instanceof CustomError) {
             res.status(err.statusCode).send(err.message);
         } else {

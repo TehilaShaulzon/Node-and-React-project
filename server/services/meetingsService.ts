@@ -19,10 +19,8 @@ export async function addMeeting(newMeeting: Meetings) {
     throw new CustomError('Error in meeting date', 400);
   const endTime = new Date(newMeeting.meetingDate);
   endTime.setMinutes(endTime.getMinutes() + service.serviceDuration);
-console.log(newMeeting.meetingDate);
 newMeeting.meetingDate=new Date(newMeeting.meetingDate)
-console.log(newMeeting.meetingDate);
-console.log(typeof(newMeeting.meetingDate));
+
 await sequelize.sync();
   const conflictingMeetings = await Meetings.findOne({
     where: {
@@ -77,6 +75,7 @@ export async function updateMeeting(meetingId: number, updatedMeeting: Meetings)
     throw new CustomError('Error in meeting date', 400);
   const endTime = new Date(updatedMeeting.meetingDate);
   endTime.setMinutes(endTime.getMinutes() + service.serviceDuration);
+  updatedMeeting.meetingDate=new Date(updatedMeeting.meetingDate)
 
   const conflictingMeetings = await Meetings.findOne({
     where: {
