@@ -39,7 +39,7 @@ export async function addUser(user: User) {
         throw new CustomError('User with the same email already exists', 400);
     }
 
-    await sequelize.authenticate()
+    await sequelize.authenticate();
     await User.sync();
     const newUser = await User.create({
         userName: user.userName,

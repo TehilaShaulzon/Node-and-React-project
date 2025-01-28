@@ -7,7 +7,7 @@ class Meeting extends Model {
   public meetingDate!: Date;
   public userId!: number;
   public serviceId!:number;
-};
+}
 Meeting.init({
   id: {
     primaryKey: true,
@@ -39,5 +39,4 @@ Meeting.init({
 Meeting.belongsTo(User, { foreignKey: 'userId' });
 Meeting.belongsTo(Service, { foreignKey: 'serviceId' });
 export { Meeting };
-
 

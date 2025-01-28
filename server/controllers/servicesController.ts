@@ -1,6 +1,6 @@
 import { addService, deleteService, getServices, updateService } from "../services/servicesService";
 import { Request, Response } from 'express';
-import { CustomError } from "../errors/CustomError"
+import { CustomError } from "../errors/CustomError";
 
 const express = require('express');
 const router = express.Router();

@@ -40,4 +40,4 @@ Service.init({
         tableName: 'services',
     });
 
-export { Service }
+export { Service };

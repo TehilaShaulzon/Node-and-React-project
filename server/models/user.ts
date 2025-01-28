@@ -1,7 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
 import sequelize from '../dataAccess/dataAccess';
 
-
 class User extends Model {
   public id!: number;
   public userName!: string;
@@ -39,6 +38,5 @@ User.init({
   sequelize,
   tableName: 'users',
 });
-export { User }
-
+export { User };
 

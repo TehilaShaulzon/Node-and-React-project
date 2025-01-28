@@ -23,10 +23,10 @@ export async function addMeeting(newMeeting: Meeting) {
     throw new CustomError('User with this Id not found', 404);
   }
   if (!isValidMeetingDate(newMeeting.meetingDate))
-    throw new CustomError('Error in meeting date', 400);
+    {throw new CustomError('Error in meeting date', 400);}
   const endTime = new Date(newMeeting.meetingDate);
   endTime.setMinutes(endTime.getMinutes() + service.serviceDuration);
-newMeeting.meetingDate=new Date(newMeeting.meetingDate)
+newMeeting.meetingDate=new Date(newMeeting.meetingDate);
 
 await sequelize.sync();
   const conflictingMeetings = await Meeting.findOne({
@@ -57,7 +57,6 @@ await sequelize.sync();
   return result;
 }
 
-
 export async function updateMeeting(meetingId: number, updatedMeeting: Meeting) {
 
   const meeting = await Meeting.findOne({
@@ -79,10 +78,10 @@ export async function updateMeeting(meetingId: number, updatedMeeting: Meeting) 
     throw new CustomError('Service with this Id not found', 404);
   }
   if (!isValidMeetingDate(updatedMeeting.meetingDate))
-    throw new CustomError('Error in meeting date', 400);
+    {throw new CustomError('Error in meeting date', 400);}
   const endTime = new Date(updatedMeeting.meetingDate);
   endTime.setMinutes(endTime.getMinutes() + service.serviceDuration);
-  updatedMeeting.meetingDate=new Date(updatedMeeting.meetingDate)
+  updatedMeeting.meetingDate=new Date(updatedMeeting.meetingDate);
 
   const conflictingMeetings = await Meeting.findOne({
     where: {

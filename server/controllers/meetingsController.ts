@@ -1,6 +1,6 @@
 import { addMeeting, getMeetings, updateMeeting } from "../services/meetingsService";
 import { Request, Response } from 'express';
-import {  CustomError } from "../errors/CustomError"
+import {  CustomError } from "../errors/CustomError";
 
 const express = require('express');
 const router = express.Router();

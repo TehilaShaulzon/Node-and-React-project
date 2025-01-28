@@ -41,5 +41,4 @@ Business.init(
   }
 );
 
-
 export { Business };

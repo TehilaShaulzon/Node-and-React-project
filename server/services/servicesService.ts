@@ -41,8 +41,6 @@ export async function addService(newService: Service) {
     return result;
 }
 
-
-
 export async function updateService(serviceId: number, updatedService: Service) {
   if (!updatedService.serviceName || !updatedService.serviceDescription || !updatedService.serviceCost || !updatedService.serviceDuration) {
         throw new CustomError('Missing required fields', 400);
@@ -94,7 +92,7 @@ export async function deleteService(serviceId: number) {
     }
 
     await service.destroy();
-    return `service ${serviceId} deleted successfully`
+    return `service ${serviceId} deleted successfully`;
 
 }
 

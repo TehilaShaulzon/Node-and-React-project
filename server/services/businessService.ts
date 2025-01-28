@@ -43,8 +43,6 @@ export async function addBusiness(newBusiness: Business) {
     return result;
 }
 
-
-
 export async function updateBusiness(businessId: number, updatedBusiness: Partial<Business>) {
 
         if (!updatedBusiness.businessName || !updatedBusiness.businessDescription || !updatedBusiness.businessEmail || !updatedBusiness.businessPhone) {
@@ -69,7 +67,6 @@ export async function updateBusiness(businessId: number, updatedBusiness: Partia
         if (!business) {
             throw new CustomError('Business not found', 404);
         }
-
        
         await business.update(updatedBusiness);
 

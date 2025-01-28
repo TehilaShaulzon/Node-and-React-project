@@ -1,10 +1,9 @@
 import { addBusiness, getBusiness, updateBusiness } from "../services/businessService";
 import { Request, Response } from 'express';
-import {  CustomError } from "../errors/CustomError"
+import {  CustomError } from "../errors/CustomError";
 
 const express = require('express');
 const router = express.Router();
-
 
 router.get('/getBusiness', async (req: Request, res: Response) => {
     try {
