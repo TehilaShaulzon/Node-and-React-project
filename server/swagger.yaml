@@ -289,6 +289,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Meetings'
+  /meetings/updateMeeting/{meetingId}:
+    put:
+      summary: Update an existing meeting
+      tags:
+        - Meetings
+      parameters:
+        - name: meetingId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:  
+            schema:
+              $ref: '#/components/schemas/Meetings'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Meetings'
+
 components:
   schemas:
     User:
