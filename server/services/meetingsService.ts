@@ -6,6 +6,13 @@ import { DATE, Op } from 'sequelize';
 import { User } from "../models/user";
 import { isValidMeetingDate } from "../validators/validators";
 
+export async function getMeetings() {
+  const services = await Meeting.findAll({
+      attributes: { exclude: ['createdAt', 'updatedAt'] }
+  });
+  return services;
+}
+
 export async function addMeeting(newMeeting: Meeting) {
   const service = await Service.findByPk(newMeeting.serviceId);
   if (!service) {
