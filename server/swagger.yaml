@@ -3,12 +3,6 @@ info:
   title: User API
   version: 1.0.0
 
-components:
-  securitySchemes:
-    bearerAuth:         
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
 
 paths:
   /users/signUp:
@@ -229,14 +223,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Services'
+              $ref: '#/components/schemas/Service'
       responses:
         '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Services'
+                $ref: '#/components/schemas/Service'
 
   /services/updateService/{serviceId}:
     put:
@@ -256,14 +250,14 @@ paths:
         content:
           application/json:  
             schema:
-              $ref: '#/components/schemas/Services'
+              $ref: '#/components/schemas/Service'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Services'
+                $ref: '#/components/schemas/Service'
 
   /services/getServices:
     get:
@@ -280,13 +274,13 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Services'
+                  $ref: '#/components/schemas/Service'
 
   /services/deleteServiceById/{serviceId}:
     delete:
       summary: Delete a service by ID
       tags:
-        - Service
+        - Services
       security:
         - bearerAuth: []
       parameters:
@@ -320,7 +314,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Meetings'
+                  $ref: '#/components/schemas/Meeting'
                 
   /meetings/addMeeting:
     post:
@@ -334,14 +328,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Meetings'
+              $ref: '#/components/schemas/Meeting'
       responses:
         '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Meetings'
+                $ref: '#/components/schemas/Meeting'
   /meetings/updateMeeting/{meetingId}:
     put:
       summary: Update an existing meeting
@@ -360,14 +354,14 @@ paths:
         content:
           application/json:  
             schema:
-              $ref: '#/components/schemas/Meetings'
+              $ref: '#/components/schemas/Meeting'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Meetings'
+                $ref: '#/components/schemas/Meeting'
   /meetings/deleteMeetingById/{meetingId}:
     delete:
       summary: Delete a meeting by ID
@@ -391,7 +385,6 @@ paths:
                 properties:
                   message:
                     type: string
-
 components:
   schemas:
     User:
@@ -466,4 +459,8 @@ components:
         - meetingDate
         - userId
         - serviceId
-
+  securitySchemes:
+    bearerAuth:         
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
