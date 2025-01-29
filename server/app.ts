@@ -6,6 +6,7 @@ import usersController from './controllers/usersController';
 import businessController from './controllers/businessController';
 import servicesController from './controllers/servicesController';
 import meetingsController from './controllers/meetingsController';
+import { verifyToken } from './middlewares/verifyTokenMiddleware';
 dotenv.config();
 const port=process.env.PORT||8000;
 const app= express();
@@ -13,6 +14,7 @@ app.use(express.json());
 
 setupSwagger(app);
 app.use('/users', usersController);
+app.use(verifyToken);
 app.use('/business', businessController);
 app.use('/services', servicesController);
 app.use('/meetings', meetingsController);
