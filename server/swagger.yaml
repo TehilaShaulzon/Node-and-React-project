@@ -3,6 +3,13 @@ info:
   title: User API
   version: 1.0.0
 
+components:
+  securitySchemes:
+    bearerAuth:         
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
 paths:
   /users/signUp:
     post:
@@ -90,6 +97,8 @@ paths:
       summary: Get business
       tags:
         - Business
+      security:
+        - bearerAuth: []
       responses:
         '200':
           description: OK
@@ -105,6 +114,8 @@ paths:
       summary: Add a new business
       tags:
         - Business
+      security:
+        - bearerAuth: []
       description: Adds a new business to the system
       requestBody:
         required: true
@@ -154,6 +165,8 @@ paths:
       summary: Update an existing business
       tags:
         - Business
+      security:
+        - bearerAuth: []
       description: Updates an existing business in the system
       parameters:
         - name: id
@@ -209,6 +222,8 @@ paths:
       summary: Add a new service
       tags:
         - Services
+      security:
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -228,6 +243,8 @@ paths:
       summary: Update an existing service
       tags:
         - Services
+      security:
+        - bearerAuth: []
       parameters:
         - name: serviceId
           in: path
@@ -253,6 +270,8 @@ paths:
       summary: Get all services
       tags:
         - Services
+      security:
+        - bearerAuth: []
       responses:
         '200':
           description: OK
@@ -267,7 +286,9 @@ paths:
     delete:
       summary: Delete a service by ID
       tags:
-        - Services
+        - Service
+      security:
+        - bearerAuth: []
       parameters:
         - name: serviceId
           in: path
@@ -289,6 +310,8 @@ paths:
       summary: Get all meetings
       tags:
         - Meetings
+      security:
+        - bearerAuth: []
       responses:
         '200':
           description: OK
@@ -304,6 +327,8 @@ paths:
       summary: Add a new meeting
       tags:
         - Meetings
+      security:
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -322,6 +347,8 @@ paths:
       summary: Update an existing meeting
       tags:
         - Meetings
+      security:
+        - bearerAuth: []
       parameters:
         - name: meetingId
           in: path
@@ -346,6 +373,8 @@ paths:
       summary: Delete a meeting by ID
       tags:
         - Meetings
+      security:
+        - bearerAuth: []
       parameters:
         - name: meetingId
           in: path
