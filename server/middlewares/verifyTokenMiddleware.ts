@@ -8,7 +8,7 @@ const verifyToken = async (req: Request, res: Response, next: NextFunction): Pro
             req.query.token || 
             (req.headers["authorization"]?.split(" ")[1]);
         if (!recieveToken) {
-            res.status(403).send("A token is required for authentication");
+            res.status(401).send("A token is required for authentication");
             return;
         }
         // אימות הטוקן מול מסד הנתונים
