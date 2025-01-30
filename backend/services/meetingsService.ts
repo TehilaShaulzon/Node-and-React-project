@@ -15,6 +15,7 @@ export async function getMeetings() {
 
 export async function addMeeting(newMeeting: Meeting) {
   const service = await Service.findByPk(newMeeting.serviceId);
+  
   if (!service) {
     throw new CustomError('Service with this Id not found', 404);
   }
